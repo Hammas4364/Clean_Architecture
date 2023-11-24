@@ -1,0 +1,12 @@
+D:\MYWORK\CleanArchitecture\Core\Domain\bin\Debug\net6.0\Domain.deps.json
+D:\MYWORK\CleanArchitecture\Core\Domain\bin\Debug\net6.0\Domain.dll
+D:\MYWORK\CleanArchitecture\Core\Domain\bin\Debug\net6.0\Domain.pdb
+D:\MYWORK\CleanArchitecture\Core\Domain\obj\Debug\net6.0\Domain.csproj.AssemblyReference.cache
+D:\MYWORK\CleanArchitecture\Core\Domain\obj\Debug\net6.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\MYWORK\CleanArchitecture\Core\Domain\obj\Debug\net6.0\Domain.AssemblyInfoInputs.cache
+D:\MYWORK\CleanArchitecture\Core\Domain\obj\Debug\net6.0\Domain.AssemblyInfo.cs
+D:\MYWORK\CleanArchitecture\Core\Domain\obj\Debug\net6.0\Domain.csproj.CoreCompileInputs.cache
+D:\MYWORK\CleanArchitecture\Core\Domain\obj\Debug\net6.0\Domain.dll
+D:\MYWORK\CleanArchitecture\Core\Domain\obj\Debug\net6.0\refint\Domain.dll
+D:\MYWORK\CleanArchitecture\Core\Domain\obj\Debug\net6.0\Domain.pdb
+D:\MYWORK\CleanArchitecture\Core\Domain\obj\Debug\net6.0\ref\Domain.dll

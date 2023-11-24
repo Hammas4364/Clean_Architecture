@@ -1,0 +1,5 @@
+D:\MYWORK\CleanArchitecture\Common\SharedKernel\obj\Debug\net6.0\SharedKernel.csproj.AssemblyReference.cache
+D:\MYWORK\CleanArchitecture\Common\SharedKernel\obj\Debug\net6.0\SharedKernel.GeneratedMSBuildEditorConfig.editorconfig
+D:\MYWORK\CleanArchitecture\Common\SharedKernel\obj\Debug\net6.0\SharedKernel.AssemblyInfoInputs.cache
+D:\MYWORK\CleanArchitecture\Common\SharedKernel\obj\Debug\net6.0\SharedKernel.AssemblyInfo.cs
+D:\MYWORK\CleanArchitecture\Common\SharedKernel\obj\Debug\net6.0\SharedKernel.csproj.CoreCompileInputs.cache
