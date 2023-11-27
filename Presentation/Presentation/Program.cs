@@ -8,11 +8,14 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using AutoWrapper;
 using SharedKernel.Helpers;
-using Persistence.Data;
 using Swashbuckle.AspNetCore.SwaggerUI;
+using Application;
+using Infrastructure;
+using Persistence;
+using Microsoft.EntityFrameworkCore;
+using Persistence.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -28,9 +31,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
-//builder.Services.AddApplication(builder.Configuration);
-//builder.Services.AddInfrastructure();
-//builder.Services.AddPersistence(builder.Configuration);
+builder.Services.AddApplication(builder.Configuration);
+builder.Services.AddInfrastructure();
+builder.Services.AddPersistence(builder.Configuration);
 
 builder.Services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =>
@@ -143,13 +146,13 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 
 var app = builder.Build();
 
-//if (Config.DoMigrate)
-//{
-//    using var s = app.Services.CreateScope();
-//    var dbContextFactory = s.ServiceProvider.GetService<IDbContextFactory<AppDbContext>>();
-//    var db = await dbContextFactory!.CreateDbContextAsync();
-//    await db.Database.MigrateAsync();
-//}
+if (Config.DoMigrate)
+{
+    using var s = app.Services.CreateScope();
+    var dbContextFactory = s.ServiceProvider.GetService<IDbContextFactory<AppDbContext>>();
+    var db = await dbContextFactory!.CreateDbContextAsync();
+    await db.Database.MigrateAsync();
+}
 
 app.UseApiResponseAndExceptionWrapper<MapResponseObject>(new AutoWrapperOptions
 {

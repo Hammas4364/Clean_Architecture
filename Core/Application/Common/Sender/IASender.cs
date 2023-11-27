@@ -1,8 +1,8 @@
-﻿using MediatR;
+﻿namespace Application.Common.Sender;
+using MediatR;
 using SharedKernel.Helpers;
-namespace SharedKernel.Sender;
 
-public interface ISender
+public interface IASender
 {
     IMediator Mediator { get; }
     Task<Response<long?>> Send<TRequest>(CommandRequest<TRequest> request, CancellationToken cancellationToken = default);

@@ -1,6 +1,5 @@
-﻿using Microsoft.Extensions.Options;
-
-namespace SharedKernel.DBConnection;
+﻿namespace Application.Common.DBConnection;
+using Microsoft.Extensions.Options;
 
 public class ConnectionStringsOption
 {

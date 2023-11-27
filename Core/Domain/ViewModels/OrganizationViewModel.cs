@@ -11,3 +11,12 @@ public class Get_Ord_Dto
     public bool Active { get; init; }
 }
 
+public class Get_OrdById_Dto
+{
+    public long OrgId { get; init; }
+    public string OrgName { get; init; } = string.Empty;
+    public string OrgDetail { get; init; } = string.Empty;
+    public bool Active { get; init; }
+}
+
+

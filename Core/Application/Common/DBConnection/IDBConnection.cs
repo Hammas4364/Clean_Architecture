@@ -1,4 +1,4 @@
-﻿namespace SharedKernel.DBConnection;
+﻿namespace Application.Common.DBConnection;
 
 public interface IDBConnection
 {
