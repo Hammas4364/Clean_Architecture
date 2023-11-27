@@ -11,7 +11,9 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPartAttribute("Application")]
 [assembly: Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPartAttribute("AutoWrapper")]
+[assembly: Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPartAttribute("Domain")]
 [assembly: Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPartAttribute("FluentValidation.AspNetCore")]
 [assembly: Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPartAttribute("Persistence")]
 [assembly: Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPartAttribute("SharedKernel")]

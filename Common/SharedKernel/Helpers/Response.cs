@@ -16,11 +16,11 @@ public enum Status
     Exception
 }
 
-public record AppResult
+public record Response
 {
-    protected AppResult() { }
+    protected Response() { }
 
-    public AppResult(object? value)
+    public Response(object? value)
     {
         Value = value;
         if (value is null)
@@ -36,7 +36,7 @@ public record AppResult
         }
     }
 
-    public AppResult(AppResult AppResult)
+    public Response(Response AppResult)
     {
         Value = AppResult.Value;
         Result = AppResult.Result;
@@ -44,7 +44,7 @@ public record AppResult
         Status = AppResult.Status;
     }
 
-    public AppResult(Exception exception)
+    public Response(Exception exception)
     {
         while (exception.InnerException is not null)
             exception = exception.InnerException;
@@ -54,7 +54,7 @@ public record AppResult
         Result = default!;
     }
 
-    public AppResult(string exceptionMessage, int statusCode = 400)
+    public Response(string exceptionMessage, int statusCode = 400)
     {
         Exception = AutoWrapperHelper.GenerateError(new AppException(exceptionMessage, statusCode));
         Value = default;
@@ -69,9 +69,9 @@ public record AppResult
     public Exception? Exception { get; set; }
 }
 
-public record AppResult<T> : AppResult
+public record Response<T> : Response
 {
-    public AppResult(T? value, string? notFoundMessage = default, string? okMessage = default)
+    public Response(T? value, string? notFoundMessage = default, string? okMessage = default)
     {
         Value = value;
 
@@ -89,57 +89,57 @@ public record AppResult<T> : AppResult
         }
     }
 
-    public AppResult(AppResult AppResult) : base(AppResult) { }
+    public Response(Response AppResult) : base(AppResult) { }
 
-    public AppResult(Exception exception) : base(exception) { }
+    public Response(Exception exception) : base(exception) { }
 
-    public AppResult(string exceptionMessage, int statusCode = 400) : base(exceptionMessage, statusCode) { }
+    public Response(string exceptionMessage, int statusCode = 400) : base(exceptionMessage, statusCode) { }
 
-    public static implicit operator AppResult<T?>(T t)
+    public static implicit operator Response<T?>(T t)
     {
-        return AppResults.From(t);
+        return ResponseResult.From(t);
     }
 
-    public static implicit operator AppResult<T?>(Exception e)
+    public static implicit operator Response<T?>(Exception e)
     {
-        return AppResults.Exception<T>(e);
+        return ResponseResult.Exception<T>(e);
     }
 
     public new T? Value { get; set; }
 }
 
-public record AppResults
+public record ResponseResult
 {
-    public static AppResult<T> OK<T>(T value, string? okMessage = default)
+    public static Response<T> OK<T>(T value, string? okMessage = default)
     {
-        return new AppResult<T>(value, default, okMessage);
+        return new Response<T>(value, default, okMessage);
     }
-    public static AppResult<T?> NotFound<T>(string? notFoundMessage = default)
+    public static Response<T?> NotFound<T>(string? notFoundMessage = default)
     {
-        return new AppResult<T?>(default, notFoundMessage, default);
+        return new Response<T?>(default, notFoundMessage, default);
     }
-    public static AppResult<T?> Exception<T>(Exception exception)
+    public static Response<T?> Exception<T>(Exception exception)
     {
-        return new AppResult<T?>(exception: exception);
+        return new Response<T?>(exception: exception);
     }
-    public static AppResult<T?> Exception<T>(string exceptionmessage, int statusCode = 400)
+    public static Response<T?> Exception<T>(string exceptionmessage, int statusCode = 400)
     {
-        return new AppResult<T?>(exceptionmessage, statusCode);
+        return new Response<T?>(exceptionmessage, statusCode);
     }
-    public static AppResult<T?> From<T>(T? value, string? notFoundMessage = default, string? okMessage = default)
+    public static Response<T?> From<T>(T? value, string? notFoundMessage = default, string? okMessage = default)
     {
-        return new AppResult<T?>(value, notFoundMessage, okMessage);
+        return new Response<T?>(value, notFoundMessage, okMessage);
     }
-    public static AppResult<IEnumerable<T>?> From<T>(IEnumerable<T>? value, string? notFoundMessage = default, string? okMessage = default)
+    public static Response<IEnumerable<T>?> From<T>(IEnumerable<T>? value, string? notFoundMessage = default, string? okMessage = default)
     {
-        return new AppResult<IEnumerable<T>?>(value, notFoundMessage, okMessage);
+        return new Response<IEnumerable<T>?>(value, notFoundMessage, okMessage);
     }
-    public static AppResult<T?> InfoMessage<T>(T value, string? InfoMessage = default, string? okMessage = default)
+    public static Response<T?> InfoMessage<T>(T value, string? InfoMessage = default, string? okMessage = default)
     {
-        return new AppResult<T?>(value, InfoMessage, okMessage);
+        return new Response<T?>(value, InfoMessage, okMessage);
     }
-    public static AppResult<T?> From<T>(AppResult AppResult)
+    public static Response<T?> From<T>(Response AppResult)
     {
-        return new AppResult<T?>(AppResult);
+        return new Response<T?>(AppResult);
     }
 }

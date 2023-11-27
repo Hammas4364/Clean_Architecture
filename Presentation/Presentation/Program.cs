@@ -23,11 +23,10 @@ builder.Host.UseSerilog(((ctx, lc) =>
     lc.ReadFrom.Configuration(ctx.Configuration);
 }));
 
-// Add services to the container.
+// Add services Start
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
-
 
 //builder.Services.AddApplication(builder.Configuration);
 //builder.Services.AddInfrastructure();
@@ -41,30 +40,29 @@ builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =
     options.SerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
     options.SerializerOptions.UnknownTypeHandling = JsonUnknownTypeHandling.JsonElement;
 });
+// Add services End
 
-//Add Cors
+//Add Cors Start
 var MyCorsPolicy = "devCorsPolicy";
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(MyCorsPolicy, builder =>
     {
         builder.WithOrigins("https://localhost:7083").AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-        //builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-        //builder.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost");
-        //builder.SetIsOriginAllowed(origin => true);
     });
 });
+//Add Cors End
 
 builder.Services.AddAuthorization();
 builder.Services.AddAuthentication("Bearer").AddJwtBearer("Bearer", options =>
 {
-    options.ClaimsIssuer = "http://192.168.1.200:9800";
+    options.ClaimsIssuer = "https://localhost:7230";
     options.RequireHttpsMetadata = false;
     options.Authority = builder.Configuration["App:Authority"];
 
     options.TokenValidationParameters = new TokenValidationParameters
     {
-        ValidAudience = "App_CleanArchitecture"
+        ValidAudience = "MSPL"
     };
 });
 
@@ -130,7 +128,6 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
-
 builder.Services.AddControllers().AddJsonOptions(jsonOptions =>
 {
     jsonOptions.JsonSerializerOptions.PropertyNamingPolicy = null;
@@ -139,7 +136,6 @@ builder.Services.AddControllers().AddJsonOptions(jsonOptions =>
     o.DataAnnotationLocalizerProvider = (type, factory) => factory.Create(typeof(Program));
 });
 
-
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
     options.SuppressModelStateInvalidFilter = true;
@@ -147,13 +143,13 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 
 var app = builder.Build();
 
-if (Config.DoMigrate)
-{
-    using var s = app.Services.CreateScope();
-    var dbContextFactory = s.ServiceProvider.GetService<IDbContextFactory<AppDbContext>>();
-    var db = await dbContextFactory!.CreateDbContextAsync();
-    await db.Database.MigrateAsync();
-}
+//if (Config.DoMigrate)
+//{
+//    using var s = app.Services.CreateScope();
+//    var dbContextFactory = s.ServiceProvider.GetService<IDbContextFactory<AppDbContext>>();
+//    var db = await dbContextFactory!.CreateDbContextAsync();
+//    await db.Database.MigrateAsync();
+//}
 
 app.UseApiResponseAndExceptionWrapper<MapResponseObject>(new AutoWrapperOptions
 {
@@ -170,7 +166,6 @@ app.UseSwaggerUI(options =>
 {
     options.DocExpansion(DocExpansion.None);
     options.DefaultModelExpandDepth(-1);
-
 });
 
 app.MapControllers().AllowAnonymous();

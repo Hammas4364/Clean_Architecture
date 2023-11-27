@@ -22,3 +22,16 @@ public static class Constants
         _ => throw new AppException($"No Token is found against the {tableName} Table.")
     };
 }
+
+public static class ControllerFields
+{
+    public const string ControllerName = "Controller Name";
+    public const string Controller = "Controller";
+}
+
+public static class CommonFields
+{
+    public const string Name = "Name";
+    public const string Id = "Id";
+    public const string Item = "Item";
+}

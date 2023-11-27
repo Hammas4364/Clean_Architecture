@@ -28,4 +28,12 @@ public static class Messages
 
     public static string NullOrWhitespaceValidationException(string propertyName) => $"{propertyName} Can't be Empty, Null or Whitespace";
     public static string MaxLengthValidationException(string propertyName, int maxLength) => $"The Length of {propertyName} can't be greater than {maxLength}.";
+
+    public static class CommonMessages
+    {
+        public const string DoesNotExist = ".Does.Not.Exist";
+        public const string AlreadyExist = ".Already.Exist";
+        public const string NameAlreadyExist = ".Name.AlreadyExist";
+        public const string NotFound = ".NotFound";
+    }
 }

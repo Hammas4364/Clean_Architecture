@@ -8,10 +8,6 @@ public record T_Orgainzation_C(IClaims Claims) : IEntityTypeConfiguration<Organi
 {
     public void Configure(EntityTypeBuilder<Organization> builder)
     {
-        builder.Property(_ => _.OrgId)
-            .HasColumnName("OrgId")
-            .HasColumnOrder(0);
-
         builder.Property(_ => _.OrgName)
             .HasColumnName("OrgName")
             .HasColumnType("NVARCHAR(64)")
