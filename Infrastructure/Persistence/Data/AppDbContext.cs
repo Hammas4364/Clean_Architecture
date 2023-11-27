@@ -8,7 +8,7 @@ namespace Persistence.Data;
 
 public class AppDbContext : DbContext
 {
-    public DbSet<Orgainzation> Orgainzations => Set<Orgainzation>();
+    public DbSet<Organization> Orgainzations => Set<Organization>();
 
     public AppDbContext(DbContextOptions options) : base(options)
     {

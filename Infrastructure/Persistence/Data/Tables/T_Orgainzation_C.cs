@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SharedKernel.Claims;
 namespace Persistence.Data.Tables;
 
-public record T_Orgainzation_C(IClaims Claims) : IEntityTypeConfiguration<Orgainzation>
+public record T_Orgainzation_C(IClaims Claims) : IEntityTypeConfiguration<Organization>
 {
-    public void Configure(EntityTypeBuilder<Orgainzation> builder)
+    public void Configure(EntityTypeBuilder<Organization> builder)
     {
         builder.Property(_ => _.OrgId)
             .HasColumnName("OrgId")

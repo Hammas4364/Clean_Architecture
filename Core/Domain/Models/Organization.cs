@@ -1,6 +1,6 @@
 ﻿namespace Domain.Models;
 
-public class Orgainzation
+public class Organization
 {
     public int OrgId { get; set; }
     public string? OrgName { get; set; }

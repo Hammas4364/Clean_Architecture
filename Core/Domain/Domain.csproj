@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <Folder Include="Seeding\" />
-    <Folder Include="ViewModels\" />
   </ItemGroup>
 
 </Project>
