@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\.github",
+    "\\Common",
+    "\\Core"
   ],
+  "SelectedNode": "\\Presentation",
   "PreviewInSolutionExplorer": false
 }
