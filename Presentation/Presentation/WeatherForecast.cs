@@ -1,4 +1,4 @@
-namespace App_CleanArchitecture
+namespace Presentation
 {
     public class WeatherForecast
     {
