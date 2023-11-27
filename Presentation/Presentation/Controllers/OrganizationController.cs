@@ -18,8 +18,8 @@ public class OrganizationController : ControllerBase
         this.organizationService = organizationService;
     }
 
-    [HttpPost]
-    public async Task<ApiResponse> Add(Add_Org_Dto addDTO, CancellationToken cancellationToken = new())
+    [HttpPost("AddOrganization")]
+    public async Task<ApiResponse> AddOrganization(Add_Org_Dto addDTO, CancellationToken cancellationToken = new())
     {
         if (!ModelState.IsValid)
             throw new ApiException(ModelState.AllErrors());
@@ -27,8 +27,8 @@ public class OrganizationController : ControllerBase
         return serviceResult;
     }
 
-    [HttpPut]
-    public async Task<ApiResponse> Update(Update_Org_Dto updateDTO, CancellationToken cancellationToken = new())
+    [HttpPut("UpdateOrganization")]
+    public async Task<ApiResponse> UpdateOrganization(Update_Org_Dto updateDTO, CancellationToken cancellationToken = new())
     {
         if (!ModelState.IsValid)
             throw new ApiException(ModelState.AllErrors());
@@ -36,16 +36,16 @@ public class OrganizationController : ControllerBase
         return serviceResult;
     }
 
-    [HttpDelete]
-    public async Task<ApiResponse> Remove(Delete_Org_Dto dto, CancellationToken cancellationToken = new())
+    [HttpDelete("RemoveOrganization")]
+    public async Task<ApiResponse> RemoveOrganization(Delete_Org_Dto dto, CancellationToken cancellationToken = new())
     {
         if (!ModelState.IsValid)
             throw new ApiException(ModelState.AllErrors());
         return await organizationService.DeleteAsync(dto, cancellationToken);
     }
 
-    [HttpGet]
-    public async Task<ApiResponse> GetAll(string? search = default, int? currentPage = default, int? pageSize = default, CancellationToken cancellationToken = new())
+    [HttpGet("GetAllOrganization")]
+    public async Task<ApiResponse> GetAllOrganization(string? search = default, int? currentPage = default, int? pageSize = default, CancellationToken cancellationToken = new())
     {
         if (!ModelState.IsValid)
             throw new ApiException(ModelState.AllErrors());
@@ -54,9 +54,8 @@ public class OrganizationController : ControllerBase
         return await organizationService.GetAllAsync(getAllParams, cancellationToken);
     }
 
-    [HttpGet]
-    [Route("{Id}")]
-    public async Task<ApiResponse> Get(long Id, CancellationToken cancellationToken = new())
+    [HttpGet("GetOrganizationById")]
+    public async Task<ApiResponse> GetOrganizationById(long Id, CancellationToken cancellationToken = new())
     {
         if (!ModelState.IsValid)
             throw new ApiException(ModelState.AllErrors());

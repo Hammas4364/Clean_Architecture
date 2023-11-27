@@ -299,6 +299,9 @@
               },
               "D:\\MSPL\\Clean_Architecture\\Core\\Application\\Application.csproj": {
                 "projectPath": "D:\\MSPL\\Clean_Architecture\\Core\\Application\\Application.csproj"
+              },
+              "D:\\MSPL\\Clean_Architecture\\Core\\Domain\\Domain.csproj": {
+                "projectPath": "D:\\MSPL\\Clean_Architecture\\Core\\Domain\\Domain.csproj"
               }
             }
           }
