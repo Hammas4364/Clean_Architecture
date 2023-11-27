@@ -1,0 +1,16 @@
+D:\MSPL\Clean_Architecture\Core\Domain\bin\Debug\net6.0\Domain.deps.json
+D:\MSPL\Clean_Architecture\Core\Domain\bin\Debug\net6.0\Domain.dll
+D:\MSPL\Clean_Architecture\Core\Domain\bin\Debug\net6.0\Domain.pdb
+D:\MSPL\Clean_Architecture\Core\Domain\bin\Debug\net6.0\SharedKernel.dll
+D:\MSPL\Clean_Architecture\Core\Domain\bin\Debug\net6.0\SharedKernel.pdb
+D:\MSPL\Clean_Architecture\Core\Domain\obj\Debug\net6.0\Domain.csproj.AssemblyReference.cache
+D:\MSPL\Clean_Architecture\Core\Domain\obj\Debug\net6.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\MSPL\Clean_Architecture\Core\Domain\obj\Debug\net6.0\Domain.AssemblyInfoInputs.cache
+D:\MSPL\Clean_Architecture\Core\Domain\obj\Debug\net6.0\Domain.AssemblyInfo.cs
+D:\MSPL\Clean_Architecture\Core\Domain\obj\Debug\net6.0\Domain.csproj.CoreCompileInputs.cache
+D:\MSPL\Clean_Architecture\Core\Domain\obj\Debug\net6.0\Domain.sourcelink.json
+D:\MSPL\Clean_Architecture\Core\Domain\obj\Debug\net6.0\Domain.csproj.CopyComplete
+D:\MSPL\Clean_Architecture\Core\Domain\obj\Debug\net6.0\Domain.dll
+D:\MSPL\Clean_Architecture\Core\Domain\obj\Debug\net6.0\refint\Domain.dll
+D:\MSPL\Clean_Architecture\Core\Domain\obj\Debug\net6.0\Domain.pdb
+D:\MSPL\Clean_Architecture\Core\Domain\obj\Debug\net6.0\ref\Domain.dll
