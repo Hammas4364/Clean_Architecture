@@ -25,11 +25,28 @@ internal static partial class Specs
         {
             SpecificationFunc = _ => _.Include(includeExpression).Where(id)
         };
-        internal static GenericASpec<TEntity> GetByColumn<TEntity>(string columnName, object value) where TEntity : class, IEntity
+
+        internal static GenericASpec<TEntity> GetByColumn1<TEntity>(string columnName, object value) where TEntity : class, IEntity
         => new()
         {
             SpecificationFunc = _ => _.Where(columnName, value)
         };
+
+        internal static GenericASpec<TEntity> GetByColumn2<TEntity>(string columnName, object value) where TEntity : class, IEntity
+        {
+            return new GenericASpec<TEntity>
+            {
+                SpecificationFunc = _ => _.Where($"{columnName} == @0", value)
+            };
+        }
+
+        internal static GenericASpec<TEntity> GetByColumn<TEntity>(string columnName, object value) where TEntity : class, IEntity
+        {
+            return new GenericASpec<TEntity>
+            {
+                SpecificationFunc = entity => entity.Where(e => EF.Property<string>(e, columnName) == (string)value)
+            };
+        }
 
         internal static GenericASpec<TEntity, TResponse> GetById<TEntity, TResponse, TValue>(string columnName, TValue value, Expression<Func<TEntity, TResponse>> selectExpression) where TEntity : class, IEntity
         => new()
@@ -40,9 +57,9 @@ internal static partial class Specs
 
     public static class OrgSpecs
     {
-        public static GenericASpec<Organization> CheckNameAlreadyExists(long Id, string Name) => new()
-        {
-            SpecificationFunc = _ => _.Where(_ => _.OrgName == Name && _.Id != Id)
-        };
+        //public static GenericASpec<Organization> CheckNameAlreadyExists(long Id, string Name) => new()
+        //{
+        //    SpecificationFunc = _ => _.Where(_ => _.OrgName == Name && _.Id != Id)
+        //};
     }
 }

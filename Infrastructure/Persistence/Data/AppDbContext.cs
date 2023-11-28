@@ -9,6 +9,7 @@ using SharedKernel.Constants;
 public class AppDbContext : DbContext
 {
     public DbSet<Organization> Orgainzations => Set<Organization>();
+    public DbSet<Employee> Employees => Set<Employee>();
 
     public AppDbContext(DbContextOptions options) : base(options)
     {

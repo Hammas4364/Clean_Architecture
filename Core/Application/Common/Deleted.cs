@@ -1,12 +1,7 @@
-﻿using SharedKernel.Entity;
+﻿namespace Application.Common;
+using SharedKernel.Entity;
 using SharedKernel.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Domain.Behaviours.Common;
 public interface IDeleted<T> where T : IEntity
 {
     T Entity { get; }

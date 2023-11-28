@@ -10,6 +10,8 @@ using MediatR;
 using Application.Common.DBConnection;
 using Domain.ViewModels;
 using Application.Handlers.Organization;
+using Application.Handlers;
+using Domain.Models;
 
 public static class ServiceCollectionExtension
 {
@@ -22,11 +24,15 @@ public static class ServiceCollectionExtension
         services.AddScoped<IASender, ASender>();
         services.AddScoped<IDBConnection, DBConnection>();
 
-        services.AddTransient<IRequestHandler<GetAllQueryRequest<Get_Ord_Dto>, Response<IEnumerable<Get_Ord_Dto>?>>, GetAllOrganizationHandler>();
+        // Organization Hanlders
+        services.AddTransient<IRequestHandler<GetAllQueryRequest<Get_Org_Dto>, Response<IEnumerable<Get_Org_Dto>?>>, GetAllOrganizationHandler>();
         services.AddTransient<IRequestHandler<CommandRequest<Add_Org_Dto>, Response<long?>>, AddOrganizationHandler>();
-        services.AddTransient<IRequestHandler<CommandRequest<Update_Org_Dto>, Response<long?>>, UpdateOrganizationHandler>();
-        services.AddTransient<IRequestHandler<CommandRequest<Delete_Org_Dto>, Response<long?>>, DeleteOrganizationHandler>();
-        //  services.AddTransient<IRequestHandler<QueryRequest<long, Get_ControllerDTO>, QResult<Get_ControllerDTO?>>, GetByIdControllerHandler>();
+        //services.AddTransient<IRequestHandler<CommandRequest<Update_Org_Dto>, Response<long?>>, UpdateOrganizationHandler>();
+        //services.AddTransient<IRequestHandler<CommandRequest<Delete_Org_Dto>, Response<long?>>, DeleteOrganizationHandler>();
+        //services.AddTransient<IRequestHandler<QueryRequest<long, Get_OrgById_Dto>, Response<Get_OrgById_Dto?>>, get>();
+        
+        // Employee Hanlders
+        services.AddTransient<IRequestHandler<CommandRequest<AddEmployee>, Response<long?>>, AddEmployeeHandler>();
     }
 }
 

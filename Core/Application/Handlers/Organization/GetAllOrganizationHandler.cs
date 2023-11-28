@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 using Domain.ViewModels;
 using SharedKernel.Claims;
 
-public record GetAllOrganizationHandler(IDapperRepository Repository, IClaims QClaims) : IGetAllQueryHandler<Get_Ord_Dto>
+public record GetAllOrganizationHandler(IDapperRepository Repository, IClaims QClaims) : IGetAllQueryHandler<Get_Org_Dto>
 {
-    async Task<Response<IEnumerable<Get_Ord_Dto>?>> IRequestHandler<GetAllQueryRequest<Get_Ord_Dto>, Response<IEnumerable<Get_Ord_Dto>?>>.Handle(GetAllQueryRequest<Get_Ord_Dto> request, CancellationToken cancellationToken)
+    async Task<Response<IEnumerable<Get_Org_Dto>?>> IRequestHandler<GetAllQueryRequest<Get_Org_Dto>, Response<IEnumerable<Get_Org_Dto>?>>.Handle(GetAllQueryRequest<Get_Org_Dto> request, CancellationToken cancellationToken)
     {
         var getall_Scroll_Specs = new GenericDSpec<string>
         {
@@ -24,9 +24,9 @@ public record GetAllOrganizationHandler(IDapperRepository Repository, IClaims QC
         if (dbJsonResult.Status is Status.Exception)
             return dbJsonResult.Exception!;
         if (dbJsonResult.Status is Status.NotFound)
-            return ResponseResult.OK<IEnumerable<Get_Ord_Dto>?>(Enumerable.Empty<Get_Ord_Dto>());
+            return ResponseResult.OK<IEnumerable<Get_Org_Dto>?>(Enumerable.Empty<Get_Org_Dto>());
 
-        var result = JsonConvert.DeserializeObject<IEnumerable<Get_Ord_Dto>?>(dbJsonResult.Value!);
+        var result = JsonConvert.DeserializeObject<IEnumerable<Get_Org_Dto>?>(dbJsonResult.Value!);
         return ResponseResult.From(result);
     }
 }

@@ -21,5 +21,6 @@ public static class ServiceCollectionExtension
 
         // SERVICES
         services.AddScoped<IOrganizationService, OrganizationService>();
+        services.AddScoped<IEmployeeService, EmployeeService>();
     }
 }

@@ -1,11 +1,28 @@
 ﻿using Newtonsoft.Json.Linq;
+using System.ComponentModel.DataAnnotations;
 
 namespace Domain.ViewModels;
 
-public record Add_Org_Dto(string OrgName, string OrgDetail, bool Active, string Token);
-public record Update_Org_Dto(long Id, string OrgName, string OrgDetail, bool Active);
-public record Delete_Org_Dto(long Id);
-public class Get_Ord_Dto
+public record Add_Org_Dto
+{
+    public string? OrgName { get; set; }
+    public string? OrgDetail { get; set; }
+}
+
+public record Update_Org_Dto
+{
+    public long Id { get; set; }
+    public string? OrgName { get; set; }
+    public string? OrgDetail { get; set; }
+    public bool Active { get; set; }
+}
+
+public record Delete_Org_Dto
+{
+    public long Id { get; set; }
+}
+
+public class Get_Org_Dto
 {
     public long Id { get; init; }
     public string OrgName { get; init; } = string.Empty;
@@ -13,12 +30,12 @@ public class Get_Ord_Dto
     public string Token { get; init; } = string.Empty;
     public bool Active { get; init; }
     public string CreatedDate { get; init; } = string.Empty;
-    public string LastModifiedDate { get; init; } = string.Empty;
+    public string ModifiedDate { get; init; } = string.Empty;
 }
 
-public class Get_OrdById_Dto
+public class Get_OrgById_Dto
 {
-    public long OrgId { get; init; }
+    public long Id { get; init; }
     public string OrgName { get; init; } = string.Empty;
     public string OrgDetail { get; init; } = string.Empty;
     public bool Active { get; init; }

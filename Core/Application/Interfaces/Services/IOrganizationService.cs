@@ -9,5 +9,5 @@ public interface IOrganizationService
     Task<ApiResponse> UpdateAsync(Update_Org_Dto addUpdateOrgDTO, CancellationToken cancellationToken = new());
     Task<ApiResponse> DeleteAsync(Delete_Org_Dto delete_OrgDTO, CancellationToken cancellationToken = new());
     Task<ApiResponse> GetAllAsync(GetAllParams getAllParams, CancellationToken cancellationToken = new());
-    Task<ApiResponse> GetAsync(long id, CancellationToken cancellationToken = new());
+    Task<ApiResponse> GetAsync(long Id, CancellationToken cancellationToken = new());
 }

@@ -13,7 +13,6 @@ public class AddOrgValidator : AbstractValidator<Add_Org_Dto>
     {
         RuleFor(_ => _.OrgName).NotEmpty().MaximumLength(64);
         RuleFor(_ => _.OrgDetail).NotEmpty().NotNull().MaximumLength(200);
-        RuleFor(_ => _.Active).NotNull();
     }
 }
 

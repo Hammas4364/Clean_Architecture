@@ -23,3 +23,14 @@ public interface IASpecification<TEntity, TResult> where TEntity : class, IEntit
     }
 }
 
+public interface ISpecification<TEntity> where TEntity : class
+{
+    Func<IQueryable<TEntity>, IQueryable<TEntity>> SpecificationFunc { get; }
+    IQueryable<TEntity> AsQueryable(IQueryable<TEntity> query);
+}
+
+public interface ISpecification<TEntity, TResult> where TEntity : class
+{
+    Func<IQueryable<TEntity>, IQueryable<TResult>> SpecificationFunc { get; }
+    IQueryable<TResult> AsQueryable(IQueryable<TEntity> query);
+}

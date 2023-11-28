@@ -1,11 +1,8 @@
 ﻿namespace Presentation.Controllers;
-
 using Application.Interfaces.Services;
 using AutoWrapper.Extensions;
 using AutoWrapper.Wrappers;
 using Domain.ViewModels;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SharedKernel.Helpers;
 
