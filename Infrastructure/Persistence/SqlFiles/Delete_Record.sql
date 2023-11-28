@@ -3,7 +3,7 @@
 -- Modified by : AbdulBasit
 -- Description: Check Id Exits
 -- =============================================
-CREATE OR ALTER PROCEDURE [dbo].[g_Delete_ByCondition] 
+CREATE PROCEDURE [dbo].[SP_Delete_ByCondition] 
 @tableName varchar(250),
 @condition varchar(255),
 @validateBeforeExecution bit = 1,

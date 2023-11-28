@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Persistence.Helpers;
 
 #nullable disable
 
@@ -8,7 +9,7 @@ namespace Persistence.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-
+            migrationBuilder.AddSqlFile();
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
