@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using SharedKernel.Constants;
 using System.Security.Claims;
 using Application.Common;
+using Application.Specifications.Base;
 
 internal record AddOrganizationHandler(IRepository Repository) : ICommandHandler<Add_Org_Dto>
 {
@@ -32,9 +33,9 @@ internal record AddOrganizationHandler(IRepository Repository) : ICommandHandler
         //string token = TokenServices.GenerateToken(claims, "This is my Organization");
         org.Token = "";
 
-        //var orgExistResult = await Repository.AnyAsync(Specs.Common.GetByColumn<Organization>("OrgName", org.OrgName), cancellationToken, false, true);
-        //if (orgExistResult.Status is Status.Exception)
-        //    return orgExistResult.Exception!;
+        var orgExistResult = await Repository.AnyAsync<Organization>(Specs.Common.GetByColumn<Organization>("OrgName", org.OrgName!), cancellationToken, false, true);
+        if (orgExistResult.Status is Status.Exception)
+            return orgExistResult.Exception!;
 
         var RepositoryAddResult = await Repository.AddAsync(org, default, true);
 

@@ -11,12 +11,12 @@ internal static partial class DSpecs
 {
     internal static class Common
     {
-        internal static GenericDSpec<TEntity> DeleteSpec<TEntity, TId>(TEntity entity) where TEntity : class, IEntity<TId>
+        internal static GenericDSpec<TEntity> DeleteSpec<TEntity, TId>(TEntity entity) where TEntity : class
         {
-            return Get_DeleteCommandDefinitation<TEntity>($"[Id]={entity.Id}");
+            return Get_DeleteCommandDefinitation<TEntity>($"[Id]={entity}");
         }
 
-        private static GenericDSpec<TEntity> Get_DeleteCommandDefinitation<TEntity>(string condition) where TEntity : class, IEntity
+        private static GenericDSpec<TEntity> Get_DeleteCommandDefinitation<TEntity>(string condition) where TEntity : class
         {
             var param = new DynamicParameters();
             param.Add("@tableName", typeof(TEntity).Name.Pluralize());
@@ -31,23 +31,24 @@ internal static partial class DSpecs
             };
         }
 
-        internal static GenericASpec<TEntity, TResponse> GetById<TEntity, TResponse>(long id, Expression<Func<TEntity, TResponse>> selectExpression) where TEntity : class, IEntity
+        internal static GenericASpec<TEntity, TResponse> GetById<TEntity, TResponse>(long id, Expression<Func<TEntity, TResponse>> selectExpression) where TEntity : class
         => new()
         {
             SpecificationFunc = _ => _.Where(id).Select(selectExpression)
         };
-
-        internal static GenericASpec<TEntity> GetByColumn<TEntity>(string columnName, object value) where TEntity : class, IEntity
+              
+        internal static GenericASpec<TEntity> GetByColumn<TEntity>(string columnName, object value) where TEntity : class
         => new()
         {
             SpecificationFunc = _ => _.Where(columnName, value)
         };
 
-        internal static GenericASpec<TEntity, TResponse> GetById<TEntity, TResponse, TValue>(string columnName, TValue value, Expression<Func<TEntity, TResponse>> selectExpression) where TEntity : class, IEntity
+        internal static GenericASpec<TEntity, TResponse> GetById<TEntity, TResponse, TValue>(string columnName, TValue value, Expression<Func<TEntity, TResponse>> selectExpression) where TEntity : class
         => new()
         {
             SpecificationFunc = _ => _.Where(columnName, value).Select(selectExpression)
         };
     }
 }
+
 

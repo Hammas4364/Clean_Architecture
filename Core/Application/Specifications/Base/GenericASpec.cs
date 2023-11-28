@@ -4,11 +4,11 @@ using System.Data;
 using System.Linq;
 using SharedKernel.Entity;
 
-internal class GenericASpec<T> : IASpecification<T> where T : class, IEntity
+internal class GenericASpec<T> : IASpecification<T> where T : class
 {
     public Func<IQueryable<T>, IQueryable<T>> SpecificationFunc { get; init; } = default!;
 }
-internal class GenericASpec<T, TResponse> : IASpecification<T, TResponse> where T : class, IEntity
+internal class GenericASpec<T, TResponse> : IASpecification<T, TResponse> where T : class
 {
     public Func<IQueryable<T>, IQueryable<TResponse>> SpecificationFunc { get; init; } = default!;
 }

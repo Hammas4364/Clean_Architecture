@@ -27,10 +27,10 @@ public static class ServiceCollectionExtension
         // Organization Hanlders
         services.AddTransient<IRequestHandler<GetAllQueryRequest<Get_Org_Dto>, Response<IEnumerable<Get_Org_Dto>?>>, GetAllOrganizationHandler>();
         services.AddTransient<IRequestHandler<CommandRequest<Add_Org_Dto>, Response<long?>>, AddOrganizationHandler>();
-        //services.AddTransient<IRequestHandler<CommandRequest<Update_Org_Dto>, Response<long?>>, UpdateOrganizationHandler>();
+        services.AddTransient<IRequestHandler<CommandRequest<Update_Org_Dto>, Response<long?>>, UpdateOrganizationHandler>();
         //services.AddTransient<IRequestHandler<CommandRequest<Delete_Org_Dto>, Response<long?>>, DeleteOrganizationHandler>();
-        //services.AddTransient<IRequestHandler<QueryRequest<long, Get_OrgById_Dto>, Response<Get_OrgById_Dto?>>, get>();
-        
+        services.AddTransient<IRequestHandler<QueryRequest<long, Get_OrgById_Dto>, Response<Get_OrgById_Dto?>>, GetOrganizationByIdHandler>();
+
         // Employee Hanlders
         services.AddTransient<IRequestHandler<CommandRequest<AddEmployee>, Response<long?>>, AddEmployeeHandler>();
     }

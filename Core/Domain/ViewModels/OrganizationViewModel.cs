@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using System.ComponentModel.DataAnnotations;
-
-namespace Domain.ViewModels;
+﻿namespace Domain.ViewModels;
 
 public record Add_Org_Dto
 {
@@ -38,7 +35,11 @@ public class Get_OrgById_Dto
     public long Id { get; init; }
     public string OrgName { get; init; } = string.Empty;
     public string OrgDetail { get; init; } = string.Empty;
+    public string Token { get; init; } = string.Empty;
+    public string CreatedDate { get; init; } = string.Empty;
+    public string ModifiedDate { get; init; } = string.Empty;
     public bool Active { get; init; }
 }
+
 
 

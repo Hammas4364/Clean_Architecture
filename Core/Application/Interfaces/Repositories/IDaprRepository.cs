@@ -64,7 +64,7 @@ public interface IDapperRepository
         return result;
     }
 
-    public async Task<Response<TId?>> DeleteAsync<TEntity, TId>(IDSpecification<TEntity> specification, bool validateBeforeExecution = true, CancellationToken cancellationToken = default) where TEntity : class, IEntity<TId>
+    public async Task<Response<TId?>> DeleteAsync<TEntity, TId>(IDSpecification<TEntity> specification, bool validateBeforeExecution = true, CancellationToken cancellationToken = default) where TEntity : class
     {
         using var con = GetConnection();
         con.Open();

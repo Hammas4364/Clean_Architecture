@@ -4,18 +4,19 @@ using Domain.Models;
 using SharedKernel.Entity;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 
 internal static partial class Specs
 {
     internal static class Common
     {
-        internal static GenericASpec<TEntity> GetById<TEntity, TId>(TId id) where TEntity : class, IEntity
+        internal static GenericASpec<TEntity> GetById<TEntity, TId>(TId id) where TEntity : class
         => new()
         {
             SpecificationFunc = _ => _.Where(id)
         };
 
-        internal static GenericASpec<TEntity, TResponse> GetById<TEntity, TResponse>(long id, Expression<Func<TEntity, TResponse>> selectExpression) where TEntity : class, IEntity
+        internal static GenericASpec<TEntity, TResponse> GetById<TEntity, TResponse>(long id, Expression<Func<TEntity, TResponse>> selectExpression) where TEntity : class
         => new()
         {
             SpecificationFunc = _ => _.Where(id).Select(selectExpression)
@@ -26,27 +27,11 @@ internal static partial class Specs
             SpecificationFunc = _ => _.Include(includeExpression).Where(id)
         };
 
-        internal static GenericASpec<TEntity> GetByColumn1<TEntity>(string columnName, object value) where TEntity : class, IEntity
+        internal static GenericASpec<TEntity> GetByColumn<TEntity>(string columnName, object value) where TEntity : class
         => new()
         {
             SpecificationFunc = _ => _.Where(columnName, value)
         };
-
-        internal static GenericASpec<TEntity> GetByColumn2<TEntity>(string columnName, object value) where TEntity : class, IEntity
-        {
-            return new GenericASpec<TEntity>
-            {
-                SpecificationFunc = _ => _.Where($"{columnName} == @0", value)
-            };
-        }
-
-        internal static GenericASpec<TEntity> GetByColumn<TEntity>(string columnName, object value) where TEntity : class, IEntity
-        {
-            return new GenericASpec<TEntity>
-            {
-                SpecificationFunc = entity => entity.Where(e => EF.Property<string>(e, columnName) == (string)value)
-            };
-        }
 
         internal static GenericASpec<TEntity, TResponse> GetById<TEntity, TResponse, TValue>(string columnName, TValue value, Expression<Func<TEntity, TResponse>> selectExpression) where TEntity : class, IEntity
         => new()
@@ -55,11 +40,12 @@ internal static partial class Specs
         };
     }
 
-    public static class OrgSpecs
+    internal static class OrganizationSpecs
     {
-        //public static GenericASpec<Organization> CheckNameAlreadyExists(long Id, string Name) => new()
-        //{
-        //    SpecificationFunc = _ => _.Where(_ => _.OrgName == Name && _.Id != Id)
-        //};
+        public static GenericASpec<Organization> CheckNameAlreadyExists(long Id, string Name) => new()
+        {
+            SpecificationFunc = _ =>
+            _.Where(_ => _.OrgName == Name && _.Id != Id)
+        };
     }
 }

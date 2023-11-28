@@ -44,7 +44,7 @@ public record OrganizationService(IASender Sender) : IOrganizationService
 
     async Task<ApiResponse> IOrganizationService.GetAsync(long id, CancellationToken cancellationToken)
     {
-        var controllerIdResult = await Sender.Send(new QueryRequest<long, Get_OrgById_Dto>(id), cancellationToken);
+        var controllerIdResult = await Sender.Send(new QueryRequest<long, Get_OrgById_Dto_Response>(id), cancellationToken);
         if (controllerIdResult.Status is Status.Exception)
             throw controllerIdResult.Exception!;
         return controllerIdResult.Result!;

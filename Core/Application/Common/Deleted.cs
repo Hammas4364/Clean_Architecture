@@ -12,7 +12,7 @@ public class Deleted<T> : IDeleted<T> where T : Entity
     {
         DeleteEvent = deleteEvent;
         Entity = model;
-        Entity.RegisterEvent(deleteEvent);
+        //Entity.RegisterEvent(deleteEvent);
     }
 
     public IDeleteDomainEvent DeleteEvent { get; }

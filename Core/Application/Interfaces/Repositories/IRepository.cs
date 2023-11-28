@@ -16,11 +16,11 @@ public interface IRepositoryBase
 public interface IReadRepository : IRepositoryBase
 {
     // Without AgregatRoot
-    protected virtual IQueryable<TEntity> ApplySpecification<TEntity>(ISpecification<TEntity> specification, bool evaluateCriteriaOnly = false) where TEntity : class
+    protected virtual IQueryable<TEntity> ApplySpecification<TEntity>(IASpecification<TEntity> specification, bool evaluateCriteriaOnly = false) where TEntity : class
     {
         return specification.AsQueryable(DbContext.Set<TEntity>());
     }
-    protected virtual IQueryable<TResult> ApplySpecification<TEntity, TResult>(ISpecification<TEntity, TResult> specification) where TEntity : class
+    protected virtual IQueryable<TResult> ApplySpecification<TEntity, TResult>(IASpecification<TEntity, TResult> specification) where TEntity : class
     {
         return specification.AsQueryable(DbContext.Set<TEntity>());
     }
@@ -40,7 +40,7 @@ public interface IReadRepository : IRepositoryBase
             return ex;
         }
     }
-    async Task<Response<TEntity?>> FirstOrDefaultAsync<TEntity>(ISpecification<TEntity> specification, CancellationToken cancellationToken = default, bool throwOnNotFoundException = true, bool throwOnAlreadyExist = false) where TEntity : class
+    async Task<Response<TEntity?>> FirstOrDefaultAsync<TEntity>(IASpecification<TEntity> specification, CancellationToken cancellationToken = default, bool throwOnNotFoundException = true, bool throwOnAlreadyExist = false) where TEntity : class
     {
         try
         {
@@ -57,7 +57,7 @@ public interface IReadRepository : IRepositoryBase
             return ex;
         }
     }
-    async Task<Response<TResult?>> FirstOrDefaultAsync<TEntity, TResult>(ISpecification<TEntity, TResult> specification, CancellationToken cancellationToken = default, bool throwOnNotFoundException = true, bool throwOnAlreadyExist = false) where TEntity : class
+    async Task<Response<TResult?>> FirstOrDefaultAsync<TEntity, TResult>(IASpecification<TEntity, TResult> specification, CancellationToken cancellationToken = default, bool throwOnNotFoundException = true, bool throwOnAlreadyExist = false) where TEntity : class
     {
         try
         {
@@ -73,7 +73,7 @@ public interface IReadRepository : IRepositoryBase
             return ex;
         }
     }
-    async Task<Response<TEntity?>> SingleOrDefaultAsync<TEntity>(ISpecification<TEntity> specification, CancellationToken cancellationToken = default, bool throwOnNotFoundException = true, bool throwOnAlreadyExist = false) where TEntity : class
+    async Task<Response<TEntity?>> SingleOrDefaultAsync<TEntity>(IASpecification<TEntity> specification, CancellationToken cancellationToken = default, bool throwOnNotFoundException = true, bool throwOnAlreadyExist = false) where TEntity : class
     {
         try
         {
@@ -89,7 +89,7 @@ public interface IReadRepository : IRepositoryBase
             return ex;
         }
     }
-    async Task<Response<TResult?>> SingleOrDefaultAsync<TEntity, TResult>(ISpecification<TEntity, TResult> specification, CancellationToken cancellationToken = default, bool throwOnNotFoundException = true, bool throwOnAlreadyExist = false) where TEntity : class
+    async Task<Response<TResult?>> SingleOrDefaultAsync<TEntity, TResult>(IASpecification<TEntity, TResult> specification, CancellationToken cancellationToken = default, bool throwOnNotFoundException = true, bool throwOnAlreadyExist = false) where TEntity : class
     {
         try
         {
@@ -125,7 +125,7 @@ public interface IReadRepository : IRepositoryBase
             return ex;
         }
     }
-    async Task<Response<IEnumerable<TEntity>?>> GetAllAsync<TEntity>(ISpecification<TEntity> specification, CancellationToken cancellationToken = default, bool throwOnNotFoundException = true, bool throwOnAlreadyExist = false) where TEntity : class
+    async Task<Response<IEnumerable<TEntity>?>> GetAllAsync<TEntity>(IASpecification<TEntity> specification, CancellationToken cancellationToken = default, bool throwOnNotFoundException = true, bool throwOnAlreadyExist = false) where TEntity : class
     {
         try
         {
@@ -144,7 +144,7 @@ public interface IReadRepository : IRepositoryBase
             return ex;
         }
     }
-    async Task<Response<IEnumerable<TResult>?>> GetAllAsync<TEntity, TResult>(ISpecification<TEntity, TResult> specification, CancellationToken cancellationToken = default, bool throwOnNotFoundException = true, bool throwOnAlreadyExist = false) where TEntity : class
+    async Task<Response<IEnumerable<TResult>?>> GetAllAsync<TEntity, TResult>(IASpecification<TEntity, TResult> specification, CancellationToken cancellationToken = default, bool throwOnNotFoundException = true, bool throwOnAlreadyExist = false) where TEntity : class
     {
         try
         {
@@ -162,7 +162,7 @@ public interface IReadRepository : IRepositoryBase
             return ex;
         }
     }
-    async Task<Response<int?>> CountAsync<TEntity>(ISpecification<TEntity> specification, CancellationToken cancellationToken = default) where TEntity : class
+    async Task<Response<int?>> CountAsync<TEntity>(IASpecification<TEntity> specification, CancellationToken cancellationToken = default) where TEntity : class
     {
         try
         {
@@ -186,7 +186,7 @@ public interface IReadRepository : IRepositoryBase
             return ex;
         }
     }
-    async Task<Response<bool?>> AnyAsync<TEntity>(ISpecification<TEntity> specification, CancellationToken cancellationToken = default, bool throwOnNotFoundException = true, bool throwOnAlreadyExist = false) where TEntity : class
+    async Task<Response<bool?>> AnyAsync<TEntity>(IASpecification<TEntity> specification, CancellationToken cancellationToken = default, bool throwOnNotFoundException = true, bool throwOnAlreadyExist = false) where TEntity : class
     {
         try
         {
