@@ -17,13 +17,10 @@ public record GetAllOrganizationHandler(IDapperRepository Repository, IClaims QC
     {
         var getall_Scroll_Specs = new GenericDSpec<string>
         {
-            CommandText = @"qn_GetAll_Controller",
-            Parameters = new { SearchValue = request.GetAllParams.SearchValue, PageNumber = request.GetAllParams.PageIndex ?? 1, PageSize = request.GetAllParams.PageSize ?? 50, OrganizationId = QClaims.OrganizationId }
+            CommandText = @"SP_GetAll_Organinzation",
+            Parameters = new { SearchValue = request.GetAllParams.SearchValue, PageNumber = request.GetAllParams.PageIndex ?? 1, PageSize = request.GetAllParams.PageSize ?? 50 }
         };
-        var dbJsonResult = await Repository.ExecuteScalarAsync(
-            getall_Scroll_Specs,
-            false,
-            cancellationToken);
+        var dbJsonResult = await Repository.ExecuteScalarAsync(getall_Scroll_Specs, false, cancellationToken);
         if (dbJsonResult.Status is Status.Exception)
             return dbJsonResult.Exception!;
         if (dbJsonResult.Status is Status.NotFound)

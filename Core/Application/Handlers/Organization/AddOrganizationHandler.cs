@@ -14,7 +14,7 @@ internal record AddOrganizationHandler(IRepository Repository) : ICommandHandler
     async Task<Response<long?>> IRequestHandler<CommandRequest<Add_Org_Dto>, Response<long?>>.Handle(CommandRequest<Add_Org_Dto> request, CancellationToken cancellationToken)
     {
         var orgExistResult = await Repository.AnyAsync(
-            Specs.Common.GetByColumn<Organization>(CommonFields.Name, request.Dto.OrgName),
+            Specs.Common.GetByColumn<Organization>("OrgName", request.Dto.OrgName),
              cancellationToken, false, true);
 
         if (orgExistResult.Status is Status.Exception)

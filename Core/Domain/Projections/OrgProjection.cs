@@ -34,6 +34,7 @@ public partial record Organization
         OrgName = e.OrgName;
         OrgDetail = e.OrgDetail;
         Active = e.Active;
+        Token = e.Token;
     }
 
     private void Apply(Org_Name_Updated ev)

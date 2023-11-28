@@ -5,7 +5,7 @@ using Domain.ViewModels;
 
 public partial record Organization
 {
-    public static Organization Create(Add_Org_Dto command) => new Organization(command.OrgName, command.OrgDetail, command.Active);
+    public static Organization Create(Add_Org_Dto command) => new Organization(command.OrgName, command.OrgDetail, command.Active, command.Token);
 
     public void Update(Update_Org_Dto dto)
     {
