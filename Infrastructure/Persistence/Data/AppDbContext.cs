@@ -1,10 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿namespace Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Serilog;
 using SharedKernel.Claims;
 using Persistence.Data.Config;
 using Domain.Models;
-namespace Persistence.Data;
 
 public class AppDbContext : DbContext
 {
