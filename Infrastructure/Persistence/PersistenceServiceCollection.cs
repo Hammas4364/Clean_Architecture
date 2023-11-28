@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Persistence.Data;
+using Infrastructure.Data;
 using Persistence.Interceptors;
 using SharedKernel;
 using Microsoft.EntityFrameworkCore;
@@ -18,8 +18,6 @@ public static class ServiceCollectionExtension
         {
             using var scope = s.CreateScope();
             var auditOnSaveChanges = scope.ServiceProvider.GetService<AuditOnSavingChanges>();
-            //if (auditOnSaveChanges is not null)
-            //    o.AddInterceptors(auditOnSaveChanges);
             o.ConfigureWarnings(b =>
             {
                 b.Ignore(CoreEventId.PossibleIncorrectRequiredNavigationWithQueryFilterInteractionWarning);
@@ -28,7 +26,6 @@ public static class ServiceCollectionExtension
 
             o.UseSqlServer(configuration.GetConnectionString("DefaultConnection")!, b =>
             {
-                //   b.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
                 b.MigrationsAssembly("Persistence");
             });
         });

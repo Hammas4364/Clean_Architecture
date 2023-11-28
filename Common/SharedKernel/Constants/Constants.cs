@@ -35,3 +35,8 @@ public static class CommonFields
     public const string Id = "Id";
     public const string Item = "Item";
 }
+
+public static class ConnectionString
+{
+    public const string cs = "Data Source=MSPL-DEV01;Initial Catalog=TestDB;Integrated Security=True;TrustServerCertificate=True";
+}

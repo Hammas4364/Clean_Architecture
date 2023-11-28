@@ -1,7 +1,7 @@
 ﻿namespace Infrastructure.Repositories;
 using Application.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Persistence.Data;
+using Infrastructure.Data;
 
 public class Repository : IRepository
 {

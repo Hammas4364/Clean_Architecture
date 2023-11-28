@@ -1,10 +1,10 @@
 ﻿namespace Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using Serilog;
-using SharedKernel.Claims;
 using Persistence.Data.Config;
 using Domain.Models;
+using Microsoft.EntityFrameworkCore.Design;
+using SharedKernel.Constants;
 
 public class AppDbContext : DbContext
 {
@@ -17,7 +17,7 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfiguration(this.GetService<IClaims>());
+        modelBuilder.ApplyConfiguration(new OrgainzationConfig());
         base.OnModelCreating(modelBuilder);
     }
 
@@ -30,5 +30,16 @@ public class AppDbContext : DbContext
     {
         base.Dispose();
         GC.SuppressFinalize(this);
+    }
+}
+
+
+public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
+{
+    public AppDbContext CreateDbContext(string[] args)
+    {
+        var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+        optionsBuilder.UseSqlServer(ConnectionString.cs);
+        return new AppDbContext(optionsBuilder.Options);
     }
 }

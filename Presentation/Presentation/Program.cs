@@ -15,7 +15,7 @@ using Application;
 using Infrastructure;
 using Persistence;
 using Microsoft.EntityFrameworkCore;
-using Persistence.Data;
+using Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
