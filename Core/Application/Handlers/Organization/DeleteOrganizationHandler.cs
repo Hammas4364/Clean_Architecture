@@ -9,17 +9,18 @@ using Domain.ViewModels;
 using Domain.Models;
 using Specifications;
 
-//internal record DeleteOrganizationHandler(IClaims Claims, IRepository Repository) : ICommandHandler<Delete_Org_Dto>
-//{
-//    async Task<Response<long?>> IRequestHandler<CommandRequest<Delete_Org_Dto>, Response<long?>>.Handle(CommandRequest<Delete_Org_Dto> request, CancellationToken cancellationToken)
-//    {
-//        var controller = await Repository.FirstOrDefaultAsync(
-//            Specs.Common.GetById<Organization, long>(request.Dto.OrgId), cancellationToken: cancellationToken);
-//        if (controller.Status is Status.Exception)
-//            return controller.Exception!;
+internal record DeleteOrganizationHandler(IClaims Claims, IRepository Repository) : ICommandHandler<Delete_Org_Dto>
+{
+    async Task<Response<long?>> IRequestHandler<CommandRequest<Delete_Org_Dto>, Response<long?>>.Handle(CommandRequest<Delete_Org_Dto> request, CancellationToken cancellationToken)
+    {
+        var OrgModelResult = await Repository.FirstOrDefaultAsync(Specifications.Specs.Common.GetById<Organization, long>(request.Dto.Id), cancellationToken);
+        if (OrgModelResult.Status is Status.Exception)
+            return OrgModelResult.Exception!;
 
-//        Response<Organization?>? reponse = await Repository.DeleteAsync(controller!.Value!.Delete(), cancellationToken: cancellationToken);
+        var RepositoryDeleteResult = await Repository.DeleteAsync(OrgModelResult.Value!, cancellationToken, true);
 
-//        return reponse.Status is Status.Exception ? reponse.Exception! : reponse.Value!.Id;
-//    }
-//}
+        if (RepositoryDeleteResult.Status == Status.Exception)
+            return RepositoryDeleteResult.Exception!;
+        return OrgModelResult.Value!.Id;
+    }
+}

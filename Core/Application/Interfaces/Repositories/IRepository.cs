@@ -524,6 +524,44 @@ public interface IWriteRepository : IRepositoryBase
             return ex;
         }
     }
+    async Task<Response<TEntity?>> DeleteAsync<TEntity>(TEntity entity, CancellationToken cancellationToken = default, bool autoSave = true) where TEntity : class
+    {
+        try
+        {
+            DbContext.Set<TEntity>().Remove(entity);
+
+            if (autoSave)
+            {
+                var SaveChangesResult = await SaveChangesAsync(cancellationToken);
+
+                if (SaveChangesResult.Status is Status.Exception)
+                    return SaveChangesResult.Exception!;
+            }
+            return entity;
+        }
+        catch (Exception ex)
+        {
+            return ex;
+        }
+    }
+    async Task<Response<IEnumerable<TEntity>?>> DeleteRangeAsync<TEntity>(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default, bool autoSave = true) where TEntity : class
+    {
+        try
+        {
+            DbContext.Set<TEntity>().RemoveRange(entities);
+            if (autoSave)
+            {
+                var SaveChangesResult = await SaveChangesAsync(cancellationToken);
+                if (SaveChangesResult.Status is Status.Exception)
+                    return SaveChangesResult.Exception!;
+            }
+            return await Task.FromResult(ResponseResult.From(entities));
+        }
+        catch (Exception ex)
+        {
+            return ex;
+        }
+    }
     async Task<Response<int?>> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         try

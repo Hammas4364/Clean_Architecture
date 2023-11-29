@@ -19,16 +19,15 @@ internal record UpdateOrganizationHandler(IRepository Repository, IClaims QClaim
         if (OrgModelResult.Status is Status.Exception)
             return OrgModelResult.Exception!;
 
-        var org = OrgModelResult.Value!;
-        await Repository.EnableChangeTracker(org);
+        OrgModelResult.Value!.OrgName = request.Dto.OrgName;
+        OrgModelResult.Value.OrgDetail = request.Dto.OrgDetail;
+        OrgModelResult.Value.Active = request.Dto.Active;
+        OrgModelResult.Value.ModifiedDate = DateTime.UtcNow;
 
-        org.Update(request.Dto);
+        var RepositoryUpdateResult = await Repository.UpdateAsync(OrgModelResult.Value, cancellationToken, true);
 
-        var qRepositoryAddResult = await Repository.SaveChangesAsync(cancellationToken);
-
-        if (qRepositoryAddResult.Status is Status.Exception)
-            return qRepositoryAddResult.Exception!;
-
-        return await Task.FromResult(org.Id);
+        if (RepositoryUpdateResult.Status == Status.Exception)
+            return RepositoryUpdateResult.Exception!;
+        return OrgModelResult.Value.Id;
     }
 }
