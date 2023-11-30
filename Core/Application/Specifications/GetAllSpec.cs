@@ -13,7 +13,7 @@ internal record GetAllSpec
     public string? SearchValue { get; init; } = null!;
 }
 
-internal record GetAllSpec<TEntity> : GetAllSpec, IASpecification<TEntity> where TEntity : class, IEntity
+internal record GetAllSpec<TEntity> : GetAllSpec, IASpecification<TEntity> where TEntity : class
 {
     public Expression<Func<TEntity, bool>>? SearchExpression { get; init; } = default!;
     Func<IQueryable<TEntity>, IQueryable<TEntity>> IASpecification<TEntity>.SpecificationFunc => query =>
@@ -24,7 +24,7 @@ internal record GetAllSpec<TEntity> : GetAllSpec, IASpecification<TEntity> where
     };
 }
 
-internal record GetAllSpec<TEntity, TResult> : GetAllSpec, IASpecification<TEntity, TResult> where TEntity : class, IEntity
+internal record GetAllSpec<TEntity, TResult> : GetAllSpec, IASpecification<TEntity, TResult> where TEntity : class
 {
     public bool IgnoreQueryFilter { get; set; } = false;
     public Func<IQueryable<TEntity>, IQueryable<TResult>> SpecificationFunc => query =>

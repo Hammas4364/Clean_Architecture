@@ -5,6 +5,8 @@ using SharedKernel.Entity;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using SharedKernel.Helpers;
+using Domain.ViewModels;
 
 internal static partial class Specs
 {
@@ -47,5 +49,36 @@ internal static partial class Specs
             SpecificationFunc = _ =>
             _.Where(_ => _.OrgName == Name && _.Id != Id)
         };
+    }
+
+    internal static class EmployeeSpecs
+    {
+        public static GenericASpec<Employee> CheckEmployeeAlreadyExists(long OrgId, long EmployeeCode) => new()
+        {
+            SpecificationFunc = _ =>
+            _.Where(_ => _.OrgId == OrgId && _.EmployeeCode != EmployeeCode)
+        };
+
+        public static GetAllSpec<Employee, Emp_Dto> GetAllEmployeeSpecs(GetAllParams getAllParams)
+        {
+            return new GetAllSpec<Employee, Emp_Dto>()
+            {
+                SearchValue = getAllParams.SearchValue,
+                SearchExpression = _ => getAllParams.SearchValue != null ? _.EmployeeName!.ToLower().Contains(getAllParams.SearchValue!.ToLower()) : _.OrgId == -1,
+                PageSize = getAllParams.PageSize,
+                PageNumber = getAllParams.PageIndex,
+                SelectExpression = _ => new Emp_Dto 
+                { 
+                    Id = _.Id, 
+                    OrgId = _.OrgId,
+                    EmployeeName = _.EmployeeName, 
+                    EmployeeCode = _.EmployeeCode, 
+                    Active = _.Active, 
+                    CreatedDate = _.CreatedDate, 
+                    ModifiedDate = _.ModifiedDate, 
+                },
+                OrderBy = _ => _.EmployeeName!,
+            };
+        }
     }
 }

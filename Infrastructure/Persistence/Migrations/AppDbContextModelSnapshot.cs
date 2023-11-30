@@ -31,60 +31,73 @@ namespace Persistence.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<bool>("Active")
-                        .HasColumnType("bit");
+                        .HasMaxLength(1)
+                        .IsUnicode(false)
+                        .HasColumnType("bit")
+                        .IsFixedLength();
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime");
 
                     b.Property<long>("EmployeeCode")
+                        .HasMaxLength(50)
+                        .IsUnicode(false)
                         .HasColumnType("bigint");
 
                     b.Property<string>("EmployeeName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<long>("OrgId")
+                        .HasMaxLength(50)
+                        .IsUnicode(false)
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employees", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Models.Organization", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasColumnName("Id")
-                        .HasColumnOrder(1);
+                        .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<bool>("Active")
-                        .HasColumnType("BIT")
-                        .HasColumnName("Active")
-                        .HasColumnOrder(4);
+                        .HasMaxLength(1)
+                        .IsUnicode(false)
+                        .HasColumnType("bit")
+                        .IsFixedLength();
 
                     b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("OrgDetail")
-                        .HasColumnType("NVARCHAR(200)")
-                        .HasColumnName("OrgDetail")
-                        .HasColumnOrder(3);
+                        .HasMaxLength(200)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(200)");
 
                     b.Property<string>("OrgName")
-                        .HasColumnType("NVARCHAR(64)")
-                        .HasColumnName("OrgName")
-                        .HasColumnOrder(2);
+                        .HasMaxLength(50)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("Token")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrgName")
-                        .IsUnique()
-                        .HasFilter("[OrgName] IS NOT NULL");
-
-                    b.ToTable("Orgainzations");
+                    b.ToTable("Organizations", (string)null);
                 });
 #pragma warning restore 612, 618
         }

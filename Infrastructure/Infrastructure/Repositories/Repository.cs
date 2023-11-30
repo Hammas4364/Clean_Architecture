@@ -2,6 +2,11 @@
 using Application.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Infrastructure.Data;
+using System.Threading.Tasks;
+using SharedKernel.Helpers;
+using System.Collections.Generic;
+using Domain.ViewModels;
+using SharedKernel.Exceptions;
 
 public class Repository : IRepository
 {
@@ -10,4 +15,5 @@ public class Repository : IRepository
     {
         DbContext = dbContextFactory.CreateDbContext();
     }
+    
 }

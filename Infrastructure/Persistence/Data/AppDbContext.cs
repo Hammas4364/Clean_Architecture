@@ -18,7 +18,28 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfiguration(new OrgainzationConfig());
+        modelBuilder.Entity<Organization>(entity =>
+        {
+            entity.HasKey(e => new { e.Id });
+            entity.ToTable("Organizations");
+            entity.Property(e => e.OrgName).HasMaxLength(50).IsUnicode(false);
+            entity.Property(e => e.OrgDetail).HasMaxLength(200).IsUnicode(false);
+            entity.Property(e => e.Active).HasMaxLength(1).IsUnicode(false).IsFixedLength();
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+        });
+
+        modelBuilder.Entity<Employee>(entity =>
+        {
+            entity.HasKey(e => new { e.Id });
+            entity.ToTable("Employees");
+            entity.Property(e => e.EmployeeCode).HasMaxLength(50).IsUnicode(false);
+            entity.Property(e => e.EmployeeName).HasMaxLength(100).IsUnicode(false);
+            entity.Property(e => e.OrgId).HasMaxLength(50).IsUnicode(false);
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+            entity.Property(e => e.Active).HasMaxLength(1).IsUnicode(false).IsFixedLength();
+        });
         base.OnModelCreating(modelBuilder);
     }
 

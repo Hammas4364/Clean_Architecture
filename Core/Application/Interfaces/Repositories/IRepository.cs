@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using SharedKernel.AggregateRoot;
 using SharedKernel.Exceptions;
 using SharedKernel.Helpers;
+using Domain.ViewModels;
 
 namespace Application.Interfaces.Repositories;
 

@@ -12,6 +12,7 @@ using Domain.ViewModels;
 using Application.Handlers.Organization;
 using Application.Handlers;
 using Domain.Models;
+using Application.Handlers.Employee;
 
 public static class ServiceCollectionExtension
 {
@@ -32,7 +33,13 @@ public static class ServiceCollectionExtension
         services.AddTransient<IRequestHandler<QueryRequest<long, Get_OrgById_Dto>, Response<Get_OrgById_Dto?>>, GetOrganizationByIdHandler>();
 
         // Employee Hanlders
-        services.AddTransient<IRequestHandler<CommandRequest<AddEmployee>, Response<long?>>, AddEmployeeHandler>();
+        services.AddTransient<IRequestHandler<GetAllQueryRequest<Emp_Dto>, Response<IEnumerable<Emp_Dto>?>>, GetAllEmployeeHandler>();
+        services.AddTransient<IRequestHandler<CommandRequest<Add_Emp_Dto>, Response<long?>>, AddEmployeeHandler>();
+        services.AddTransient<IRequestHandler<CommandRequest<Update_Emp_Dto>, Response<long?>>, UpdateEmployeeHandler>();
+        services.AddTransient<IRequestHandler<CommandRequest<Delete_Emp_Dto>, Response<long?>>, DeleteEmployeeHandler>();
+        services.AddTransient<IRequestHandler<QueryRequest<long, Emp_Dto>, Response<Emp_Dto?>>, GetEmployeeByIdHandler>();
+        services.AddTransient<IRequestHandler<CommandRequest<Update_Emp_Dto>, Response<long?>>, AddOrUpdateEmployeeHandler>();
+        //services.AddTransient<IRequestHandler<GetAllQueryRequest<Get_EmpByOrgId_Dto>, Response<IEnumerable<Get_EmpByOrgId_Dto>?>>, GetEmployeeByOrgHandler>();
     }
 }
 
